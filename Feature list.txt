@@ -1,0 +1,22 @@
+Feature list
+
+
+Sort contact array
+  delete extra information
+    return modified array
+
+Dispaly time of course once per time base
+
+populate first and last name into a class roster by level
+  populate name of level above each class
+  handle exceptions if class is larger than limit
+
+divide times unto different sheets
+
+populates back out to excel
+
+desired features
+
+populate date range for classes for attendance
+
+populate a pass fail area for records

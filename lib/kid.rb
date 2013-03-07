@@ -35,8 +35,8 @@ class Kid
     data[:session_time]
   end
   
-  def day
-    data[:day_of_week]
+  def day_time
+    data[:session]
   end
 
   def date_range
@@ -51,30 +51,47 @@ class Kid
       x = x + 2
       p x.to_s
     end 
-  end 
+  end  
 
 end
 
 program_size = {
-                "Swim Lessons, Youth 1 - Polliwog" => 4,
+                "Swim Lessons, Preschool 1 - Pike"     => 5,
+                "Swim Lessons, Preschool 2 - Eel"      => 5,
+                "Swim Lessons, Preschool 3 - Ray"      => 5,
+                "Swim Lessons, Preschool 4 - Starfish" => 5,
+                "Swim Lessons, Youth 1 - Polliwog"     => 5,
+                "Swim Lessons, Youth 2 - Guppy"        => 5,
+                "Swim Lessons, Youth 3 - Minnow"       => 6,
+                "Swim Lessons, Youth 4 - Fish"         => 6,
+                "Swim Lessons, Youth 5 - Flying Fish"  => 6,
+                "Swim Lessons, Youth 6 - Shark"        => 6,
                }
 
-File.open("roster_test.xls") do |f|
+File.open("roster_test(2).xls") do |f|
   kids = Kid.from_excel(f)
 
   kids.reject! { |kid| kid.program.nil? or kid.program.empty? }
 
   kids.each do |kid|
     # do any extra sanity checking here
-    p kid.full_name
+    #p kid.full_name
     #p kid.seg_start.to_s
     #p kid.time
-    p kid.date_range
+    #p kid.date_range
+    #p kid.day_time
   end
 
   groups = kids.group_by do |kid| 
-    kid.time
+    kid.day_time
     kid.program
+  end
+
+  groups.each do |day_time, group|
+    #time =
+    group.each_slice(day_time).uniq? do |subgroup|
+      p subgroup
+    end  
   end
 
   groups.each do |program, group|

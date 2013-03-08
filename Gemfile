@@ -11,5 +11,7 @@ group :development do
   gem 'rubyzip'
   gem 'spreadsheet'
   gem 'google-spreadsheet-ruby'
-  gem 'active_support/inflector'
+  gem 'active_support'
+  gem 'iconv'
+  gem 'from_excel'
 end

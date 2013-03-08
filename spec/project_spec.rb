@@ -1,4 +1,4 @@
-$LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
+require 'spec_helper'
 require 'roo'
 require 'from_excel'
 require 'kid'
@@ -7,14 +7,16 @@ Excel = Roo::Excel
 
 descibe Roster do
   include ExcelImport	
-  subject = File.open("../lib/roster_test.xls") do |f|
-  	kids = from_excel(f)
+  File.open("roster_test.xls") do |f|
+  	subject = from_excel(f)
   end
     
-    it 'take an excel file and make an array of hash'
+    it 'take an excel file and make an array of hash' do
+    	subject.should == Kid.new
+    end
   
     it '#program, returns level' do 
-	
+	  
     end
 
     it 'should return an array with esential information'

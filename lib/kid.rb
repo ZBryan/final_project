@@ -83,21 +83,22 @@ File.open("roster_test(2).xls") do |f|
   end
 
   groups = kids.group_by do |kid| 
-    kid.day_time
+    #kid.day_time
     kid.program
   end
 
-  groups.each do |day_time, group|
-    #time =
-    group.each_slice(day_time).uniq? do |subgroup|
-      p subgroup
-    end  
-  end
+pp groups
+  #groups.each do |day_time, group|
+  #  #time =
+  #  group.each_slice(day_time).uniq? do |subgroup|
+  #    p subgroup
+  #  end  
+  #end
 
   groups.each do |program, group|
     size = program_size[program]
     group.each_slice(size).each do |subgroup|
-      p subgroup.size
+      #p subgroup.size
     end
   end
 

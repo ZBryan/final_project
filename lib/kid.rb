@@ -35,9 +35,21 @@ class Kid
     data[:session_time]
   end
   
-  def day_time
+  def day
+    data[:"day(s)_of_week"]
+  end 
+
+  def session
     data[:session]
   end
+
+  def all_sorted_by field
+    data.sort {|x,y| x[field] <=> y[field]}
+  end
+
+  # def sorted_by_program 
+  #   sorted_by_session.sort {|x,y| x[program] <=> y[program]}
+  # end
 
   def date_range
     #range = Array.new
@@ -68,32 +80,27 @@ program_size = {
                 "Swim Lessons, Youth 6 - Shark"        => 6,
                }
 
-File.open("roster_test(2).xls") do |f|
+File.open("lib/roster_test.xls") do |f|
   kids = Kid.from_excel(f)
 
   kids.reject! { |kid| kid.program.nil? or kid.program.empty? }
 
   kids.each do |kid|
     # do any extra sanity checking here
-    #p kid.full_name
-    #p kid.seg_start.to_s
-    #p kid.time
-    #p kid.date_range
-    #p kid.day_time
+    # kid.all_sorted_by(:session)
+    # p kid.full_name
+    # #p kid.time
+    # #p kid.date_range
+    # #p kid.day
+    # p kid.program
   end
 
   groups = kids.group_by do |kid| 
-    #kid.day_time
+    kid.session
     kid.program
   end
 
 pp groups
-  #groups.each do |day_time, group|
-  #  #time =
-  #  group.each_slice(day_time).uniq? do |subgroup|
-  #    p subgroup
-  #  end  
-  #end
 
   groups.each do |program, group|
     size = program_size[program]

@@ -8,127 +8,72 @@ class Data_File
 
 
   def initialize 
-    @kid = []
-    CSV.foreach("lib/roster_test.csv", :headers => true) do |row|
-      @kid << row.to_hash
+    @kids = []
+    CSV.foreach("lib/roster_test(2).csv", :headers => true) do |row|
+      @kids << row.to_hash
     end
   end
 
-def full_name
-  "#{@kid[:"first_name"]} " + "#{@kid[:"last_name"]}"
-end
+  def full_name
+    "#{@kids[:"first_name"]} " + "#{@kids[:"last_name"]}"
+  end
 
+  def program
+    @kids["Program"]
+  end
 
-end
-
-
-#   def raw_data
-#     @raw_data
-#   end
-# pp raw_data
-#   ##
-#   # the list of fields expected in input lines
-#   #
-#   def fields
-#     [:full_name, :city, :state, :email]
-#   end
-
-#   ##
-#   # create a contact (a hash) from raw input line
-#   #
-#   def contact_hash line
-#     values = line.split("|")
-#     Hash[fields.zip values]
-#   end
-
-#   ##
-#   # return a comma separated list of formatted email addresses
-#   #
-#   def email_list
-#     @raw_entries.collect do |line|
-#       name, city, state, email = line.split("|")
-#       format_email_address name, email.chomp
-#     end.join(", ")
-#   end
-
-#   ##
-#   # returns "Display Name" <email@address> given name and email
-#   #
-#   def format_email_address name, email
-#     %{"#{name}" <#{email}>}
-#   end
-
-#   def num_entries
-#     @raw_entries.length
-#   end
-
-#   def contact index
-#     @contacts[index.to_i]
-#   end
-
-#   #########
-
-#   def format_contact contact
-#     #@raw_entries
-#     #contact %{\"#{:full_name}, of #{:city}, #{:state}\" <#{:email}>}
-#     #Hash[%{#{:full_name}, :city]}
-#     #{}%{#{contact}}
-#     #contact_hash %{#{name}}
-#     #contact.map { |contact| contact[:full_name]}
-#     #contact.values %{\"#{:full_name}\" of \"#{:city}\"}
-#     #contact.keys
-#     #contact.values %{\"#{:full_name} of #{:city} #{:state}\" <#{:email}>}
-#     #{ |contact| %s of %s %s <#{:email}> % [:full_name, :city, :state]}
-#     #{}%{"Brandon Faloona of Seattle WA" <bfaloona@uw.edu>}
-#     #contact = %{{|contact|[:full_name]} "of" {contact[:city]}}
-#     %{"#{contact[:full_name]} of #{contact[:city]} #{contact[:state]}" <#{contact[:email]}>}
-#   end
-
-#   def all
-#     @contacts
-#   end
-
-#   def formatted_list
-#     truck_string = ""
-#     @contacts.each{|x|
-#       truck_string += format_contact(x) + "\n"
-#     }
-#     truck_string.chomp
-#   end
-
-#   def full_names
-#     truck_array = Array.new
-#     @contacts.each{|x|
-#       truck_array << x[:full_name]
-#     }
-#     truck_array
-#   end
-
-#   def cities
-#     truck_array = Array.new
-#     @contacts.each{|x|
-#       truck_array << x[:city]
-#     }
-#     truck_array.uniq
-#   end
-
-#   def append_contact contact
-#     @contacts << contact
-#   end
-
-#   def delete_contact index
-#     @contacts.delete_at(index)
-#   end
-
-#   def search string
-#     #truck_array = Array.new
-#     #@contacts.each{|x| if x.include? string then truck_array << x} 
-#     #truck_array
-#     @contacts.select { |x| x.value? string } #do #|x| if x.values.include?(string) ; x #end
-#   end
-
-  # def all_sorted_by field
-  #   @contacts.sort {|x,y| x[field] <=> y[field]}
-  # end
+  def sort_session
+    @kids.reject! { |kid| kid["Session"].nil? or kid["Session"].empty? }
+    sessions = {}
+    @kids.each do |kid|
+      unless sessions.has_key? kid["Session"]
+        sessions[kid["Session"]] = []
+      end
+      sessions[kid["Session"]] << kid
+    end
+    sessions
+  end
   
- # end
+  def sort_program
+    @kids.reject! { |kid| kid["Session"].nil? or kid["Session"].empty? }
+    program = {}
+    @kids.each do |kid|
+      unless program.has_key? kid["Program"]
+        program[kid["Program"]] = []
+      end
+      program[kid["Program"]] << kid
+    end
+    program
+  end
+
+  # def sort_all
+  #   @kid.sort {|x,y| x[sort_session] <=> y[sort_session]}
+  # end
+
+end
+
+test = Data_File.new
+sessions = test.sort_session
+# programs = test.sort_program
+# sessions.sort {|x,y| x["Session"] <=> y["Session"]}
+puts sessions.class
+sessions.each_key do |key|
+  puts key
+  # programs.each_key do |key|
+  # puts key
+  # programs[key].each do |kid|
+  #   puts "#{kid['First Name']} #{kid['Last Name']}"
+  # end
+  # sessions[key].each do |kid|
+  #   puts "#{kid['First Name']} #{kid['Last Name']}"
+  # end
+# programs.each_key do |key|
+#   puts key
+#   programs[key].each do |kid|
+#     puts "#{kid['First Name']} #{kid['Last Name']}"
+#   end
+
+end
+
+
+

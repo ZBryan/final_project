@@ -8,21 +8,23 @@ class ClassList
   def initialize(file)
     @kids = []
     CSV.foreach(file, :headers => true) do |row|
-      full_name = row["First Name"].to_s + " " + row["Last Name"].to_s
+      full_name = "#{row["First Name"]} #{row["Last Name"]}"
       @kids << Kid.new(full_name, row["Program"], row["Session"])
     end
   end
 
-  def list
-    @kids
+  def sessions
+    @kids.map { |kid| kid.pro_session }.uniq.sort
   end
 
-  def sort
-    @kids.sort { |x,y| x.pro_session <=> y.pro_session }   
-  end
-
-  def session_array
-    @kids.uniq { |x| x.pro_session }
-  end
+  # def class_max level
+  #   if level.count <= 5
+  #     level.count
+  #   elsif level.count >= 6 <= 10
+  #     level.count/2
+  #   else level.count >= 11 <= 15
+  #     level.count/3
+  #   end
+  # end
 
 end

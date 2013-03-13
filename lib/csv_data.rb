@@ -15,7 +15,7 @@ class Data_File
   end
 
   def full_name
-    "#{@kids[:"first_name"]} " + "#{@kids[:"last_name"]}"
+    "#{@kids[:"first_name"]} #{@kids[:"last_name"]}"
   end
 
   def program

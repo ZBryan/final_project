@@ -1,35 +1,52 @@
 require_relative './classlist'
 
-test = ClassList.new "roster_test(2).csv"
-test.sort.each do |x|
-	#puts x.name + "////" + x.pro_session
-end
+path = ARGV.shift || "roster_test(2).csv"
+test = ClassList.new path
 
-test.session_array.each do |x|
-  sbux = test.kids.select { |y| y.pro_session == x.pro_session }
-    a = 0
-    b = 0
+# test.sort_list.each do |x|
+# 	puts x.name + "////" + x.pro_session
+# end
 
-    class_array = Array.new
+io = $stdout
+IO.popen("pbcopy", "w") { |io|
+  test.sessions.each do |session|
+    kids = test.kids.select { |kid| kid.pro_session == session }
+    # puts sbux.class_max
 
-    while a < sbux.count
-      if class_array.at(b) == nil
-        class_array[b] = Array.new
+    # a = 0
+    # b = 0
+
+    # class_array = []
+
+    max  = kids.first.max_class_size
+
+    bucket_count = (kids.size / max).ceil
+    avg = kids.size.to_f / bucket_count
+    classes = kids.each_slice(avg.ceil).to_a
+
+    # while a < sbux.count
+    #   if class_array.at(b) == nil
+    #     class_array[b] = []
+    #   end
+    #   if b + 1 < (sbux.count/5.0).ceil
+    #     class_array[b] << sbux[a]
+    #     b += 1
+    #   else
+    #     class_array[b] << sbux[a]
+    #     b = 0
+    #   end
+    #   a += 1
+    # end
+
+    io.puts session
+    io.puts
+    classes.each do |klass|
+      klass.each do |kid|
+        io.puts kid.name
       end
-      if b <= (sbux.count/5.0).ceil
-        class_array[b] << sbux[a]
-      b += 1
-      else
-        class_array[b] << sbux[a]
-        b = 0
-      end
-      a += 1
-    end
-    puts "+++++++" + x.pro_session
-    class_array.each do |ca|
-      puts " ====New Class"
-      ca.each { |p| puts p.name}
+      io.puts
     end
 
-end
+  end
+}
 

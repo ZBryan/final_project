@@ -3,18 +3,16 @@ require './lib/csv_data.rb'
 
 describe Contacts do
 
-  let(:data) {  "Brandon Faloona|Seattle|WA|bfaloona@uw.edu\n" <<
-                "Barack Obama|Washington|DC|president@wh.gov\n" <<
-                "Jason Shaw|Seattle|WA|shawjaso@uw.edu\n" }
+  let(:data) {  CSV.read("../lib/roster_test.csv", :headers => true) }
 
-  subject { Contacts.new data }
+  subject { Data_File.new data }
 
-  it '#raw_entries returns Array' do
-    subject.raw_entries.should be_a Enumerable
+  it '#raw_data returns Array' do
+    subject.raw_data.should be_a Enumerable
   end
 
-  it '#raw_entries contains 3 entries' do
-    subject.raw_entries.count.should eq 3
+  it '#raw_data contains 3 entries' do
+    subject.raw_data.count.should eq >=3
   end
 
   it '#email_list includes Jason in output' do

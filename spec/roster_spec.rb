@@ -20,10 +20,6 @@ describe ClassList do
     input.should_not eq raw_data
   end
 
-  it 'classes should have 5 or less kids' do
-    
-  end
-
   it '#sessions should have no nil values' do
     input = roster.sessions.nil?
     expected = false
@@ -44,53 +40,3 @@ describe ClassList do
   end
 
 end  
-
-
-
-# ["Mon & Wed, 10:00 - 10:30am P1 - Pike
-
-# Sean Barneson
-
-# Mon & Wed, 10:30 - 11:00am P3 - Ray
-
-# Samuel Bell
-
-# Mon & Wed, 4:00 - 4:30pm P1 - Pike
-
-# Jayla Hang
-# Maddex Hang
-# Moe Kawase
-# Maxton Khemmanivanh
-
-# Alexander Ng
-# Adric O'Madadhain
-# Riley O'Madadhain
-# Charlie Welling
-
-# Mon & Wed, 4:00 - 4:30pm Y2 - Guppy
-
-# Nick Barnes
-# Christiana Breuel
-# Evan Chang
-
-# Mon & Wed, 4:35 - 5:05pm P1 - Pike
-
-# Saul Benzinger
-# Kian Curley 
-
-# Mon & Wed, 4:35 - 5:05pm P2 - Eel
-
-# Benjamin Benezra
-
-# Mon & Wed, 6:00 - 6:30pm P3 - Ray
-
-# Trista Vanderveer
-
-# Tues & Thurs, 4:00 - 4:30pm P1 - Pike
-
-# Samara Beukelman
-# Senet Borgmann
-# Beckett Luke
-# Vitaly Sapronova
-# Lucille Smith"]
-

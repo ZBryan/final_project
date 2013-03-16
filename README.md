@@ -3,6 +3,12 @@ swim_roster
 YMCA of greater seattle swim lesson roster builder. hand it an csv data file for swim lessons 
 and it will copy the formated data to clipboard, which can be pasted into word, or excel to print
 
+**Using gem
+
+$ swim_roster file_location/file.csv
+
+paste output into your desired program (excel, word, etc.)
+
 ## Installation
 
 Add this line to your application's Gemfile:

@@ -11,7 +11,6 @@ class Kid
   def pro_slice
     # "Swim Lessons, Preschool 1 - Pike" => "P1 Pike"
     @program.slice(@program.index(/,/) + 2).to_s + @program.slice(@program.index(/\d/), @program.length).to_s
-    
   end
 
   def pro_session

@@ -4,7 +4,7 @@ $LOAD_PATH.unshift File.expand_path("/lib", __FILE__)
 # TODO: Below, change the gem name, authors, and email
 
 Gem::Specification.new do |s|
-  s.name        = 'zb_roster'
+  s.name        = 'swim_roster'
   s.version     = "0.0.1" 
   s.date        = '2013-03-07'
   s.summary     = "swim lesson roster builder"

@@ -14,6 +14,7 @@ class ClassList
   end
 
   def sessions
+    @kids.reject! { |kid| kid.pro_session.nil? or kid.pro_session.empty? }
     @kids.map { |kid| kid.pro_session }.uniq.sort
   end
 
